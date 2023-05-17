@@ -502,9 +502,6 @@ model.to(device)
 
 optimizer = Adam(model.parameters(), lr=1e-3)
 
-
-from torchvision.utils import save_image
-
 epochs = 6
 
 for epoch in range(epochs):
