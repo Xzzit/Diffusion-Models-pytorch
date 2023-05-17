@@ -66,6 +66,7 @@ class WeightStandardizedConv2d(nn.Conv2d):
     """
     https://arxiv.org/abs/1903.10520
     weight standardization purportedly works synergistically with group normalization
+    also check different normalization tricks: https://towardsdatascience.com/different-normalization-layers-in-deep-learning-1a7214ff71d6
     """
 
     def forward(self, x):
@@ -237,10 +238,9 @@ class Unet(nn.Module):
         # layers
         self.downs = nn.ModuleList([])
         self.ups = nn.ModuleList([])
-        num_resolutions = len(in_out)
 
         for ind, (dim_in, dim_out) in enumerate(in_out):
-            is_last = ind >= (num_resolutions - 1)
+            is_last = ind == (len(in_out) - 1)
 
             self.downs.append(
                 nn.ModuleList(
