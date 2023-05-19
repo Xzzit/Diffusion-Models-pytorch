@@ -467,6 +467,7 @@ def p_sample(model, x, t, t_index):
         posterior_variance_t = extract(posterior_variance, t, x.shape)
         noise = torch.randn_like(x)
         # Algorithm 2 line 4:
+        # Little difference using q(x_t | x_{t-1}) and beta_t
         return model_mean + torch.sqrt(posterior_variance_t) * noise 
 
 # Algorithm 2 (including returning all images)
